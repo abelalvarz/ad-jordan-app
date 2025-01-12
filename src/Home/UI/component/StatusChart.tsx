@@ -1,6 +1,6 @@
 
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export const StatusChart = () => {
@@ -9,7 +9,7 @@ export const StatusChart = () => {
 
     useEffect(() => {
         const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
+        // const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
         const data = {

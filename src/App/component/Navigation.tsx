@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 export const Navigation = () => {
-    const isLoggedIn = false
+    // const isLoggedIn = false
 
     useEffect(() => {
 
