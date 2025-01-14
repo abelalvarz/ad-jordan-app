@@ -2,10 +2,11 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"],
-      "@home/*": ["./src/Home/*"],
-      "@report/*": ["./src/Report/*"],
-      "@auth/*": ["./src/Auth/*"],
-      "@app/*": ["./src/App/*"]
+      "@home/*": ["./src/UI/Home/*"],
+      "@report/*": ["./src/UI/Report/*"],
+      "@auth/*": ["./src/UI/Auth/*"],
+      "@app/*": ["./src/UI/App/*"],
+      "@core/*": ["./src/Core/*"]
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",

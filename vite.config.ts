@@ -16,10 +16,11 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@home': path.resolve(__dirname, './src/Home'),
-      '@report': path.resolve(__dirname, './src/Report'),
-      '@auth': path.resolve(__dirname, './src/Auth'),
-      '@app': path.resolve(__dirname, './src/App'),
+      '@home': path.resolve(__dirname, './src/UI/Home'),
+      '@report': path.resolve(__dirname, './src/UI/Report'),
+      '@auth': path.resolve(__dirname, './src/UI/Auth'),
+      '@app': path.resolve(__dirname, './src/UI/App'),
+      '@core': path.resolve(__dirname, './src/Core'),
     }
   },
 })

@@ -8,10 +8,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@home/*": ["./src/Home/*"],
-      "@report/*": ["./src/Report/*"],
-      "@auth/*": ["./src/Auth/*"],
-      "@app/*": ["./src/App/*"]
+      "@iu/*": ["src/UI/Home/*"],
+      "@report/*": ["src/UI/Report/*"],
+      "@auth/*": ["src/UI/Auth/*"],
+      "@app/*": ["src/UI/App/*"],
+      "@core/*": ["./src/Core/*"]
     },
   }
 }
