@@ -1,6 +1,7 @@
 import { PageContainer } from '@/UI/App/styled-components/PageContainer'
 import { StatusChart } from './component/StatusChart'
 import { CardContainer } from './style-component/CardContainer'
+import { HeadContainer } from '../App/styled-components/HeadContainer'
 
 const reportes = [
     { date: '4 de Enero 2025' },
@@ -16,7 +17,9 @@ export const HomePage = () => {
     return (
         <PageContainer>
             <div className='relative h-full '>
-                <h1 className='text-xl font-bold'>Bienvenido</h1>
+                <HeadContainer>
+                    <h1 className='text-xl font-bold'>Bienvenido</h1>
+                </HeadContainer>
 
                 <CardContainer title='Asistencia de Mes'>
                     <StatusChart />

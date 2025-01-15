@@ -1,1 +1,2 @@
-export const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone ? true : false
+const navigation:any = navigator;
+export const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigation.standalone  ? true : false
