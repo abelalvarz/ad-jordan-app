@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
     background: #f1f1f1;
+}
+
+.custom-scroll {
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.custom-scroll::-webkit-scrollbar {
+    display: none;
 }
