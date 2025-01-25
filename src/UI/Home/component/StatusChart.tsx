@@ -3,23 +3,27 @@
 import { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export const StatusChart = () => {
+interface Props{
+    label: string[],
+    colors: string[],
+    value: number[]
+}
+export const StatusChart = ({label, value, colors}:Props) => {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
     useEffect(() => {
         const documentStyle = getComputedStyle(document.documentElement);
-        // const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
         const data = {
-            labels: ['Enero 4', 'Enero 11', 'Enero 18', 'Enero 25'],
+            labels: label,
             datasets: [
                 {
-                    label: 'Enero',
-                    backgroundColor: ['#007bff', '#28a745', '#fd7e14', '#6f42c1'], // Colores en formato hexadecimal
+                    label: 'Asistentes',
+                    backgroundColor: colors, 
                     borderColor: ['#007bff', '#28a745', '#fd7e14', '#6f42c1'],
-                    data: [20, 28, 20, 15]
+                    data: value
                 }
             ]
         };
@@ -62,11 +66,11 @@ export const StatusChart = () => {
 
         setChartData(data);
         setChartOptions(options);
-    }, []);
+    }, [label, value]);
 
     return (
-        <div className="card px-5">
-            <Chart type="bar" data={chartData} options={chartOptions} />
+        <div className="card px-5 w-full">
+            <Chart type="bar" data={chartData} options={chartOptions}/>
         </div>
     )
 }

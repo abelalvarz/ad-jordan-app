@@ -1,45 +1,65 @@
 import { PageContainer } from '@/UI/App/styled-components/PageContainer'
-import { StatusChart } from './component/StatusChart'
-import { CardContainer } from './style-component/CardContainer'
-import { HeadContainer } from '../App/styled-components/HeadContainer'
+import { ResumeCardComponent } from './component/ResumeCardComponent'
+import { GraficCardComponent } from './component/GraficCardComponent'
+import { Calendar } from 'primereact/calendar'
+import { useState } from 'react'
+import { subDays, startOfDay, endOfDay } from 'date-fns'
+const getLastWednesdayAndTuesday = () => {
+    const now = new Date();
+    const currentDayOfWeek = now.getDay();
 
-const reportes = [
-    { date: '4 de Enero 2025' },
-    { date: '11 de Enero 2025' },
-    { date: '18 de Enero 2025' },
-    { date: '25 de Enero 2025' },
-    { date: '25 de Enero 2025' },
-    { date: '25 de Enero 2025' },
-]
+    const daysSinceLastWednesday = (currentDayOfWeek >= 6)
+        ? currentDayOfWeek - 12
+        : 7 + currentDayOfWeek - 12;
+    const lastWednesday = subDays(now, daysSinceLastWednesday + 7);
+
+    const daysSinceLastTuesday = (currentDayOfWeek >= 5)
+        ? currentDayOfWeek - 12
+        : 7 + currentDayOfWeek - 12;
+    const thisTuesday = subDays(now, daysSinceLastTuesday);
+
+    return {
+        initial: startOfDay(lastWednesday),
+        final: endOfDay(thisTuesday),
+    };
+};
 
 export const HomePage = () => {
 
+    const [rangeOfDate, setRangeOfDate] = useState(getLastWednesdayAndTuesday())
+
     return (
         <PageContainer>
-            <div className='relative h-full '>
-                <HeadContainer>
-                    <h1 className='text-xl font-bold'>Bienvenido</h1>
-                </HeadContainer>
+            <div className='relative h-full flex flex-col justify-evenly'>
+                <div className='mx-1 flex justify-between '>
+                    <h2 className='text-3xl font-bold'>Bienvenido, usuario</h2>
+                    <div className='flex justify-around'>
+                        <div className='flex flex-col'>
+                            <label>Fecha Inicial</label>
+                            <Calendar
+                                value={rangeOfDate.initial}
+                                onChange={(e: any) => setRangeOfDate({ ...rangeOfDate, initial: e.value })}
+                                placeholder='Fecha Inicial'
+                                inputClassName='p-2 '
 
-                <CardContainer title='Asistencia de Mes'>
-                    <StatusChart />
-                </CardContainer>
+                                className='bg-blue-400 mx-0 rounded-md'
+                                showIcon />
+                        </div>
+                        <div className='flex flex-col'>
 
-                <div className='px-0 py-0 md:w-full'>
-                    <h1 className='text-xl font-bold'>Recientes</h1>
-                    <div className="w-full h-full overflow-x-scroll">
-                        {
-                            reportes.map((reporte, i) => (
-                                <div key={i} className='px-5 py-3 mt-2 bg-slate-300 rounded-t-md'>
-                                    <h2 className='text-blue-600 '>Reporte de {reporte.date}</h2>
-                                </div>
-                            ))
-                        }
+                            <label>Fecha Final</label>
+                            <Calendar
+                            value={rangeOfDate.final} onChange={(e: any) => setRangeOfDate({ ...rangeOfDate, final: e.value })}
+                            placeholder='Fecha Final'
+                            inputClassName='p-2'
+                            className='bg-blue-400 mx-2 rounded-md'
+                            showIcon />
+                        </div>
                     </div>
-
                 </div>
+                <ResumeCardComponent initialDate={rangeOfDate.initial} finalDate={rangeOfDate.final} />
+                <GraficCardComponent initialDate={rangeOfDate.initial} finalDate={rangeOfDate.final} />
             </div>
-
         </PageContainer>
     )
 }

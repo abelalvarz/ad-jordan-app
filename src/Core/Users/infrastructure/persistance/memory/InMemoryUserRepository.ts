@@ -1,6 +1,6 @@
-import { UserNotFoundError } from "@/Core/domain/exceptions/UserNotFoundError";
-import { User } from "@/Core/domain/model/User";
-import { UserRepository } from "@/Core/domain/repository/UserRepository";
+import { UserNotFoundError } from "@/Core/Users/domain/UserNotFoundError";
+import { User } from "@/Core/Users/domain/model/User";
+import { UserRepository } from "@/Core/Users/domain/repository/UserRepository";
 
 const Users: User[] = [];
 

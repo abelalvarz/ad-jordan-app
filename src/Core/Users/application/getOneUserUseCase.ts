@@ -1,5 +1,5 @@
-import { User } from "@/Core/domain/model/User";
-import { UserRepository } from "@/Core/domain/repository/UserRepository";
+import { User } from "@/Core/Users/domain/model/User";
+import { UserRepository } from "@/Core/Users/domain/repository/UserRepository";
 
 export class GetOneUserUseCase {
     constructor(private readonly repository: UserRepository) { }

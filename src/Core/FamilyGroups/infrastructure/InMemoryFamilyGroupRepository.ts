@@ -1,7 +1,7 @@
-import { FamilyGroup } from "@/Core/domain/model/FamilyGroup";
-import { FamilyGroupRepository } from "@/Core/domain/repository/FamiltyGroupRepository";
+import { FamilyGroup } from "@/Core/FamilyGroups/domain/model/FamilyGroup";
+import { FamilyGroupRepository } from "../domain/repository/FamiltyGroupRepository";
 
-const FamilyGroups: FamilyGroup[] = [];
+const FamilyGroups: FamilyGroup[] = []
 
 export class InMemoryFamiltyGroupRepository implements FamilyGroupRepository {
 

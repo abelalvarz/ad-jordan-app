@@ -1,6 +1,6 @@
-import { GetOneUserUseCase } from "../application/userUseCases/getOneUserUseCase";
-import { RegisterUserUseCase } from "../application/userUseCases/registerUserUseCase";
-import { InMemoryUserRepository } from "../infrastructure/persistance/InMemoryUserRepository"
+import { GetOneUserUseCase } from "../Users/application/getOneUserUseCase";
+import { RegisterUserUseCase } from "../Users/application/registerUserUseCase";
+import { InMemoryUserRepository } from "../Users/infrastructure/persistance/memory/InMemoryUserRepository"
 
 const repository = new InMemoryUserRepository();
 
