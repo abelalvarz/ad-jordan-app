@@ -1,6 +1,7 @@
 import { ReportService } from "@/Core/Adapters/ReportService";
 import { useEffect, useState } from "react";
 import { PieChart } from "../../styled-component/PieChart";
+import { TotalCategoryAttendance } from "@/Core/Reports/application/dtos/TotalCategoryAttendance";
 
 interface Prosp {
     initialDate: any;
@@ -18,7 +19,7 @@ const initialState: Category = {
 }
 
 export const CategoryAttendanceGrafic = ({ initialDate, finalDate }: Prosp) => {
-    
+
     const reportService = ReportService;
     const [categoryValues, setCategoryValues] = useState<Category>(initialState)
 
@@ -34,7 +35,7 @@ export const CategoryAttendanceGrafic = ({ initialDate, finalDate }: Prosp) => {
         const newLabels: string[] = [];
         const newValues: number[] = [];
 
-        response.forEach((item) => {
+        response.forEach((item: TotalCategoryAttendance) => {
             newLabels.push(item.category);
             newValues.push(parseInt(item.totalAttendance));
         });

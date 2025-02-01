@@ -7,11 +7,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@iu/*": ["src/UI/Home/*"],
-      "@report/*": ["src/UI/Report/*"],
-      "@auth/*": ["src/UI/Auth/*"],
-      "@app/*": ["src/UI/App/*"],
+      "@/*": ["./src/*"],
+      "@iu/*": ["./src/UI/Home/*"],
+      "@report/*": ["./src/UI/Report/*"],
+      "@auth/*": ["./src/UI/Auth/*"],
+      "@app/*": ["./src/UI/App/*"],
       "@core/*": ["./src/Core/*"]
     },
   }
