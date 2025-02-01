@@ -11,21 +11,15 @@ export class FirebaseFamilyGroupRepository implements FamilyGroupRepository {
     async getAll(): Promise<FamilyGroup[]> {
         const groupShot = await getDocs(this.collection);
         const groupList = groupShot.docs.map(doc => {
-            console.log(doc.id)
             return doc.data()
         })
-        console.log(groupList)
         const convertedList = groupList.map((item) => {
-            console.log(item)
-             return new FamilyGroup(item.color, item.name)
+            return new FamilyGroup(item.color, item.name)
         })
-
         return Promise.resolve(convertedList)
     }
     async createGroup(familyGroup: FamilyGroup): Promise<void> {
-
-        const newDoc = await addDoc(this.collection, familyGroup)
-        console.log("documento agregado exitosamente", newDoc)
+        await addDoc(this.collection, familyGroup)
         return Promise.resolve()
     }
 

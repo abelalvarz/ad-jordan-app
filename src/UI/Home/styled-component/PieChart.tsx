@@ -6,7 +6,6 @@ export const PieChart = ({params}:any) => {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
-    console.log(params)
     useEffect(() => {
         const documentStyle = getComputedStyle(document.documentElement);
         const data = {
@@ -42,8 +41,8 @@ export const PieChart = ({params}:any) => {
     }, [params]);
 
     return (
-        <div className="w-full h-[50vh] overflow-hidden" >
-            <Chart type="pie" data={chartData} options={chartOptions} className='w-full flex justify-center items-center h-full' />
+        <div className="w-full h-[45vh] overflow-hidden" >
+            <Chart type="pie" data={chartData} options={chartOptions} className='w-full h-full flex justify-center items-center ' />
         </div>
     )
 }

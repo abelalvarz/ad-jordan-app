@@ -8,7 +8,8 @@ interface Props{
     colors: string[],
     value: number[]
 }
-export const StatusChart = ({label, value, colors}:Props) => {
+export const BarChart = ({label, value, colors}:Props) => {
+
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -70,7 +71,7 @@ export const StatusChart = ({label, value, colors}:Props) => {
 
     return (
         <div className="card px-5 w-full">
-            <Chart type="bar" data={chartData} options={chartOptions}/>
+            <Chart type="bar" data={chartData} options={chartOptions} className='w-full h-auto flex justify-center items-center ' />
         </div>
     )
 }

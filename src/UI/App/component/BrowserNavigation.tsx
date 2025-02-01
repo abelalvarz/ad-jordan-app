@@ -41,7 +41,6 @@ export const BrowserNavigation = () => {
 					</div>
 					{
 						AppRoutes.map((route, i) => {
-							// console.log(route.icon)
 							if (!route.icon) return;
 							return (
 								<Link

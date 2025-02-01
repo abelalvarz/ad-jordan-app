@@ -2,21 +2,28 @@ import { isStandalone } from '@/UI/App/utils/standaloneChecker'
 import { Button } from 'primereact/button'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CreateReportForm } from './CreateReportForm'
 import { ConfirmationDialog } from './ConfirmationDialog'
 import { HeadContainer } from '@/UI/App/styled-components/HeadContainer'
 import { ReportService } from '@/Core/Adapters/ReportService'
 import { Report } from '@/Core/Reports/domain/model/Report'
 import { useToast } from '@/UI/App/context/ToastContext'
+import { ReportCreation } from './ReportFormComponent/ReportCreation'
 
 const initialState: Report = {
     familyGroup: null,
     activeMember: "",
+    activeMemberChildren: '',
     noActiveMember: "",
+    noActiveMemberChildren: '',
     totalAttendance: "",
+    visitorChildren: '',
     visitors: "",
     visitedHomes: "",
     newChristians: "",
+    reconciled:"",
+    vigilAttendance: "",
+    offering: "",
+    notes: "",
     meetingDate: new Date(),
     creationDate: new Date(),
     createdBy: "test",
@@ -32,7 +39,6 @@ export const CreateReport = () => {
     const [visible, setVisible] = useState(false)
     const [showDialog, setShowDialog] = useState(false);
 
-    console.log(report)
     useEffect(() => {
         setInterval(() => {
             setVisible(true)
@@ -45,7 +51,6 @@ export const CreateReport = () => {
     }
 
     const handleOnchangeData = (newValues: Object) => {
-        console.log(newValues)
         setReport((preValues) => ({
             ...preValues,
             ...newValues
@@ -53,33 +58,38 @@ export const CreateReport = () => {
     }
 
     const handleSave = () => {
-        if(!report.meetingDate){
-            toast?.show('warn','Informacion','La Fecha es requerida')
+        if (!report.meetingDate) {
+            toast?.show('warn', 'Informacion', 'La Fecha es requerida')
             return
         }
-        if(!report.familyGroup){
-            toast?.show('warn','Informacion','Debe seleccionar un grupo')
+        if (!report.familyGroup) {
+            toast?.show('warn', 'Informacion', 'Debe seleccionar un grupo')
             return
         }
-        if(!report.activeMember){
-            toast?.show('warn','Informacion','Campo Miembros activos es requerido')
+        if (!report.activeMember) {
+            toast?.show('warn', 'Informacion', 'Campo Miembros activos es requerido')
             return
         }
         setShowDialog(!showDialog)
     }
+
     const save = async () => {
+        const activeMember = report.activeMember == "" ? 0 : parseInt(report.activeMember)
+        const activeMemberChildren = report.activeMemberChildren == "" ? 0 : parseInt(report.activeMemberChildren)
+        const noActiveMember = report.noActiveMember == "" ? 0 : parseInt(report.noActiveMember)
+        const noActiveMemberChildren = report.noActiveMemberChildren == "" ? 0 : parseInt(report.noActiveMemberChildren)
+        const visitorChildren = report.visitorChildren == "" ? 0 : parseInt(report.visitorChildren)
+        const visitors = report.visitors == "" ? 0 : parseInt(report.visitors)
+        const totalAsistencia = 0 + 0 + activeMember + activeMemberChildren + noActiveMember + noActiveMemberChildren + visitorChildren + visitors
+        const reporToSubmit = { ...report, totalAttendance: totalAsistencia.toString() }
 
-        const totalAsistencia = 0 + parseInt(report.activeMember) + parseInt(report.noActiveMember) + parseInt(report.visitors);
-        const reporToSubmit = { ...report, total:totalAsistencia.toString()}
-
-        console.log("Report to Submit", reporToSubmit)
-        console.log(reporToSubmit)
         const response = await service.create.execute(reporToSubmit)
-        console.log(response);
-
+        if (response === null) {
+            toast?.show('error', "Error.", "El reporte no se pudo crear.");
+            return;
+        }
+        
         toast?.show('success', "Exito.", "Reporte enviado exitosamente");
-
-        console.log(report)
         navigate("/")
     }
 
@@ -96,7 +106,7 @@ export const CreateReport = () => {
                         onClick={handleClose} />
                 </HeadContainer>
 
-                <CreateReportForm
+                <ReportCreation
                     data={report}
                     onChangeData={handleOnchangeData}
                     handleShowDialog={() => handleSave()} />

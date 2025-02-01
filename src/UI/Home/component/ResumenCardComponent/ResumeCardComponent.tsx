@@ -9,15 +9,18 @@ interface Props {
     initialDate: Date,
     finalDate: Date
 }
+
+const initialState: SummaryReport = {
+    totalAttendance: "",
+    totalHomeVisited: "",
+    totalVisitors: "",
+    totalNewChristians: ""
+}
+
 export const ResumeCardComponent = ({ initialDate, finalDate }: Props) => {
 
     const reportService = ReportService;
-    const [summary, setSummary] = useState<SummaryReport>({
-        totalAttendance: "",
-        totalHomeVisited: "",
-        totalVisitors: "",
-        totalNewChristians: ""
-    })
+    const [summary, setSummary] = useState<SummaryReport>(initialState)
 
     useEffect(() => {
         if (initialDate && finalDate) {
@@ -26,14 +29,12 @@ export const ResumeCardComponent = ({ initialDate, finalDate }: Props) => {
     }, [initialDate, finalDate]);
 
     const getSummaryReport = async () => {
-
         const response = await reportService.getSummaryReport.execute(initialDate, finalDate);
         setSummary(response)
     };
 
     return (
         <div className='mx-1 flex justify-between '>
-
             <div className='bg-gray-50 p-5 py-10 rounded-md flex items-center w-full mr-5'>
                 <div className='p-5 bg-blue-300 rounded-full mr-3'>
                     <BsPeople size={30} color='blue' />

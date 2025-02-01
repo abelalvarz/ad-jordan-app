@@ -6,14 +6,11 @@ export class GetSummaryReportUseCase {
 
     async execute(initialDate:Date, finalDate:Date): Promise<SummaryReport> {
         const reports = await this.repository.getByPeriod(initialDate,finalDate);
-        console.log(reports)
         const totalAttendents = reports.reduce((acc, report) => acc + (parseInt(report.totalAttendance) | 0), 0)
         const visitedHomes = reports.reduce((acc, report) => acc + (parseInt(report.visitedHomes) | 0), 0)
         const visitors = reports.reduce((acc, report) => acc + (parseInt(report.visitors) | 0), 0)
         const newChristians = reports.reduce((acc, report) => acc + (parseInt(report.newChristians) | 0), 0)
-
-        console.log("visitors", visitors)
-
+        
         return Promise.resolve(new SummaryReport(totalAttendents, visitedHomes, visitors, newChristians))
     }
 }

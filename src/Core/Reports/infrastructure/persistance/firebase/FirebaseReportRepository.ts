@@ -10,6 +10,7 @@ export class FirebaseReportRepository implements ReportRepository {
     private readonly collection = collection(database, "Reports")
 
     async create(report: Report): Promise<void> {
+        console.log(report)
         const reportData = {
             ...report,
             familyGroup: {
@@ -17,8 +18,8 @@ export class FirebaseReportRepository implements ReportRepository {
                 color: report.familyGroup?.color || ""
             }
         };
-        const newReport = await addDoc(this.collection, reportData);
-        console.log("new Report created", newReport)
+        // const newReport = 
+        await addDoc(this.collection, reportData);
         return Promise.resolve()
     }
 
@@ -26,23 +27,30 @@ export class FirebaseReportRepository implements ReportRepository {
 
         const reports = await getDocs(this.collection);
         const reportList = reports.docs.map((doc) => doc.data())
-        const convertedList = reportList.map((report) => new Report(
+
+        const convertedList = reportList.map((report: any) => new Report(
             report.familyGroup,
             report.activeMember,
+            report.activeMemberChildren,
             report.noActiveMember,
-            '',
-            '',
-            '',
-            report.total,
+            report.noActiveMemberChildren,
+            report.visitorChildren,
+            report.visitors,
+            report.totalAttendance,
+            report.visitedHomes,
+            report.newChristians,
+            report.reconciled,
+            report.vigilAttendance,
+            report.offering,
+            report.notes,
             new Date(report.meetingDate.seconds * 1000),
             report.creationDate,
             report.createdBy
         ))
-        console.log(convertedList)
         return Promise.resolve(convertedList)
     }
 
-    async getByPeriod(initialDate:Date, finalDate: Date): Promise<Report[]> {
+    async getByPeriod(initialDate: Date, finalDate: Date): Promise<Report[]> {
         // const { startOfWeek, endOfWeek } = this.getStartEndWeek()
         const customeQuery = query(this.collection, where("meetingDate", ">=", initialDate), where("meetingDate", "<=", finalDate))
         const reports = await getDocs(customeQuery);
@@ -51,17 +59,25 @@ export class FirebaseReportRepository implements ReportRepository {
         const convertedList = reportsList.map((report) => new Report(
             report.familyGroup,
             report.activeMember,
+            report.activeMemberChildren,
             report.noActiveMember,
-            report.newChristians,
+            report.noActiveMemberChildren,
+            report.visitorChildren,
             report.visitors,
+            report.totalAttendance,
             report.visitedHomes,
-            report.total,
+            report.newChristians,
+            report.reconciled,
+            report.vigilAttendance,
+            report.offering,
+            report.notes,
             new Date(report.meetingDate.seconds * 1000),
             report.creationDate,
             report.createdBy
         ))
         return Promise.resolve(convertedList)
     }
+
     getStartEndWeek() {
         const now = new Date();
 

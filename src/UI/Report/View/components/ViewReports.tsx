@@ -43,10 +43,10 @@ export const ViewReports = () => {
     ]
 
     return (
-        <div className='flex flex-col justify-start items-center w-full h-full sm:mt-[5vh] md:mt-[5vh] rounded-md'>
+        <div className='flex flex-col justify-start items-center w-full h-full sm:mt-[5vh] md:mt-[5vh] rounded-md bg-gray-100'>
             <div className={`xl:w-[70%] lg:w-[70%] md:w-[90%] w-full h-full max-sm:bg-transparent rounded-md top-0 `}>
                 <HeadContainer className="p-0">
-                    <div className="w-full top-0   bg-gray-100 flex flex-col justify-center z-10">
+                    <div className="w-full top-0    flex flex-col justify-center z-10">
                         <h1 className='font-bold text-xl'>Reportes</h1>
                         <div className="flex h-fit custom-scroll my-5 flex-col">
                             <div>
@@ -71,15 +71,11 @@ export const ViewReports = () => {
                     <DataTable
                         className="max-sm:hidden"
                         value={reports} tableStyle={{ minWidth: '50rem' }}>
-                        {/* <Column field="name" header="Nombre"></Column> */}
+                        <Column field="name" header="Nombre"></Column>
                         <Column field="date" header="Fecha"></Column>
                         <Column field="total" header="Total"></Column>
-                        <Column field="total" header="Total"></Column>
-                        <Column field="total" header="Total"></Column>
-                        <Column field="total" header="Total"></Column>
-                        <Column field="total" header="Total"></Column>
-                        <Column field="total" header="Total"></Column>
-                        {/* <Column className="w-10 " field="category" header="Acciones"></Column> */}
+                        <Column field="total" header="Miembros Activos"></Column>
+                        <Column className="w-10 " field="category" header="Acciones"></Column>
                     </DataTable>
                     <div className="sm:hidden">
                         {
