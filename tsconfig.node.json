@@ -18,7 +18,15 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@home/*": ["./src/UI/Home/*"],
+      "@report/*": ["./src/UI/Report/*"],
+      "@auth/*": ["./src/UI/Auth/*"],
+      "@app/*": ["./src/UI/App/*"],
+      "@core/*": ["./src/Core/*"]
+    },
   },
   "include": ["vite.config.ts"]
 }

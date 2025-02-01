@@ -21,6 +21,7 @@ export default defineConfig({
       '@auth': path.resolve(__dirname, './src/UI/Auth'),
       '@app': path.resolve(__dirname, './src/UI/App'),
       '@core': path.resolve(__dirname, './src/Core'),
-    }
+    },
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
 })
